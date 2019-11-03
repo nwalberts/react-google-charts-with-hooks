@@ -1,7 +1,15 @@
-import React from 'react'
+import React from "react"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import ChartsContainer from "./ChartsContainer"
 
-export const App = (props) => {
-  return (<h1>Make It So React</h1>)
+const App = (props) => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ChartsContainer} />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App
