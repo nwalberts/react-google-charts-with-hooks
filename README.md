@@ -67,6 +67,45 @@ https://developers.google.com/chart/interactive/docs/reference#addrow
 
 * options: this prop will be an object with keys that you can set based on the type of chart you are using. Usually, `title`, `height`, `width`, and `legend` are options available on most charts. This is where the bulk of customization will begin for the chart you wish to use.
 
+#### Chart Events
+Triggering callbacks based on user events is a little more involved than the rest of the library. A chart can also take an object with an array of event data objects. This will expose a `chartWrapper` object to you, which you will likely be calling `getChart` and `getSelection` on in order to retrieve information about the specific chart element you selected or interacted with.
+
+```js
+const chartEvents = [
+  {
+    eventName: "select",
+    callback({ chartWrapper }) {
+      console.log("Selected ", chartWrapper.getChart().getSelection());
+    }
+  }
+];
+```
+
+I highly recommend you use the demo code below in your app in order to investigate the unique objects passed back to you. https://react-google-charts.com/user-selection
+Unfortunately, they don't do an excellent job at telling us about this method we can call on each object that gets returned. However, you can see some of these methods here: https://github.com/rakannimer/react-google-charts/blob/cc749cf9ec8f8072c9965b1436b9f9547e147196/src/types.ts
+
+Most likely, you would want to pass a different set of data to your chart based on a user interaction with your chart. So in this case, you would want to trigger your own callback function that will change state or make a new fetch for new data, and re-render the chart.
+
+
+Below is a possible (untested) example.
+```js
+const chartEvents = [
+  {
+    eventName: "select",
+    callback({ chartWrapper }) {
+      const chart = chartWrapper.getChart()
+      const selection = chart.getSelection()
+      const [selectedItem] = selection
+      const dataTable = chartWrapper.getDataTable()
+      const { row, column } = selectedItem
+
+      passNewData(row)
+      // passNewData could take the row you clicked on, and use it to fetch new data from the backend. Then you setstate in your fetch and your chart should re-render.
+    }
+  }
+];
+```
+
 To see more options about the chart you are using, go to your chart types specific options table.
 https://react-google-charts.com/
 **Note:** that `height`, `width` and a few other option keys can be passed in as their own props as well. You may have to dig into the Chart.js in the React Google Charts library to see what props are allowable, otherwise just pass them into the options object.

@@ -17,7 +17,6 @@ const BarChart = () => {
         }
       ]}
       options={
-        // Chart options
         {
           title: "Age vs. Weight comparison",
           hAxis: {
