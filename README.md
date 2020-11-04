@@ -4,7 +4,7 @@ Note that this is a wrapper library around the base JavaScript library, [Google 
 
 This is using a React-Rails webpacker boilerplate w/ Postgress.
 Setup commands
-- `bundle` should do the trick
+- `bundle install` should do the trick
 - `yarn install` if you need to install new node modules
 - `rake db:create && rake db:migrate` to setup your DB
 
