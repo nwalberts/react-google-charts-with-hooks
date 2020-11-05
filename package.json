@@ -1,6 +1,10 @@
 {
   "name": "react-google-charts-hooks",
   "private": true,
+  "engines": {
+    "node": ">=6.0.0",
+    "yarn": ">=0.25.2"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "prop-types": "~15.6.0",
@@ -17,7 +21,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.6.2",
     "babel-loader": "^8.0.6",
-    "react-router-dom": "5.0.0",
+    "react-router-dom": "^5.2.0",
     "redbox-react": "1.6.0",
     "react-google-charts": "3.0.6"
   },
